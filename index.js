@@ -2,8 +2,8 @@ const express = require("express")
 const app = express()
 app.use(express.json())
 const cors = require("cors")
+require("dotenv").config()
 app.use(cors())
- require("dotenv").config()
 const {connect} = require("./config/db")
 // const {userRouter} = require("./routes/user.route")
 // const {noteRouter} =  require("./routes/note.route")
@@ -20,9 +20,9 @@ app.get("/",(req,res)=>{
 
 
 
-app.listen(PORT,()=>{
+app.listen(PORT,async()=>{
     try{
-          connect
+         await connect
     }catch(err){
         console.log("somthing error in connection")
         console.log(err)
