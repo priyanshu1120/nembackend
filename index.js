@@ -3,7 +3,7 @@ const app = express()
 app.use(express.json())
 const cors = require("cors")
 app.use(cors())
-const PORT  = require("dotenv").config().parsed.PORT
+ require("dotenv").config()
 const {connect} = require("./config/db")
 // const {userRouter} = require("./routes/user.route")
 // const {noteRouter} =  require("./routes/note.route")
@@ -27,5 +27,5 @@ app.listen(PORT,()=>{
         console.log("somthing error in connection")
         console.log(err)
     }
-    console.log(`server run on http://localhost:${PORT}`) 
+    console.log(`server run on http://localhost:${process.env.PORT}`) 
 })
