@@ -4,7 +4,10 @@ app.use(express.json())
 const {connect} = require("./config/db")
 const cors = require("cors")
 const {userRouter} = require("./routes/user.route")
+const {noteRouter} = require("./routes/note.route")
+const {authentication} = require("./middleware/authentication")
 require("dotenv").config()
+
 app.use(cors({
     origin:"*"
 }))
@@ -15,8 +18,8 @@ app.get("/",(req,res)=>{
 
 app.use("/users",userRouter)
 
-// app.use(authentication)
-// app.use("/notes",noteRouter)
+app.use(authentication)
+app.use("/notes",noteRouter)
 
 
 
