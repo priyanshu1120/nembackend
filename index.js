@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 app.use(express.json())
+const {connect} = require("./config/db")
 const cors = require("cors")
 require("dotenv").config()
 app.use(cors({
@@ -18,7 +19,12 @@ app.get("/",(req,res)=>{
 
 
 
-app.listen(process.env.PORT,()=>{
-
-    console.log(`server run on http://localhost:${process.env.PORT}`) 
+app.listen(process.env.PORT,async ()=>{
+  try{
+       await connect
+       console.log(`server run on http://localhost:${process.env.PORT}`) 
+  }catch(err){
+     console.log(err)
+  }
+    
 })
