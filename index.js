@@ -22,9 +22,9 @@ app.use("/notes",noteRouter)
 
 
 
-app.listen(PORT,async()=>{
+app.listen(PORT,()=>{
     try{
-        await connect
+          connect
     }catch(err){
         console.log("somthing error in connection")
         console.log(err)
