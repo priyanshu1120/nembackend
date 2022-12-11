@@ -23,11 +23,6 @@ app.get("/",(req,res)=>{
 
 
 app.listen(PORT,()=>{
-    try{
-          connect
-    }catch(err){
-        console.log("somthing error in connection")
-        console.log(err)
-    }
+
     console.log(`server run on http://localhost:${process.env.PORT}`) 
 })
