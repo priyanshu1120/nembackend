@@ -17,7 +17,7 @@ app.get("/",(req,res)=>{
     res.send("server run ")
 })
 
-app.use(authentication)
+// app.use(authentication)
 app.use("/notes",noteRouter)
 
 
