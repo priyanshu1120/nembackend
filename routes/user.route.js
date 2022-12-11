@@ -12,13 +12,13 @@ userRouter.post("/signup", async (req, res) => {
     res.send({"msg":"email already exits try with another"});
   } else {
     try {
-      // bcrypt.hash(password, 5, async function (err, hash) {
-       
-      // });
+      bcrypt.hash(password, 5, async function (err, hash) {
+        const userData = new UserModel({ email, password, name, age });
+        await userData.save();
+        res.send("user created successfully");
+      });
 
-      const userData = new UserModel({ email, password, name, age });
-      await userData.save();
-      res.send("user created successfully");
+    
     } catch (err) {
       console.log(err);
       res.send({"msg":"Something went wrong, pls try again later"});
@@ -26,26 +26,26 @@ userRouter.post("/signup", async (req, res) => {
   }
 });
 
-// userRouter.post("/login", async (req, res) => {
-//   const { email, password } = req.body;
-// try{
-//         let user = await UserModel.find({ email });
-//         if (user.length > 0) {
-//             const hashed_password = user[0].password;
-//             bcrypt.compare(password, hashed_password, function (err, result) {
-//             if (result) {
-//                     const token = jwt.sign({ userID: user[0]._id }, `${process.env.KEY}`);
-//                         res.send({ msg: "Login successfull", token: token });
-//             } else {
-//                         res.send("authentication failed");
-//                     }
-//                 });
-//         } else {
-//                 res.send("authentication failed");
-//             }
-//     } catch (err) {
-//         res.send("somthing error in login");
-//        }
-// });
+userRouter.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+try{
+        let user = await UserModel.find({ email });
+        if (user.length > 0) {
+            const hashed_password = user[0].password;
+            bcrypt.compare(password, hashed_password, function (err, result) {
+            if (result) {
+                    const token = jwt.sign({ userID: user[0]._id }, `${process.env.KEY}`);
+                        res.send({ msg: "Login successfull", token: token });
+            } else {
+                        res.send("authentication failed");
+                    }
+                });
+        } else {
+                res.send("authentication failed");
+            }
+    } catch (err) {
+        res.send("somthing error in login");
+       }
+});
 
 module.exports = { userRouter };
