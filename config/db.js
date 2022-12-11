@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const URL = require('dotenv').config().parsed.Mongo_url
+ require('dotenv').config()
 mongoose.set('strictQuery',false)
-const connect = mongoose.connect(URL)
+const connect = mongoose.connect(process.env.MONGOURL)
 module.exports = {connect}
