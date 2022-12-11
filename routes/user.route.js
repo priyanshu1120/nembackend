@@ -13,7 +13,7 @@ userRouter.post("/signup", async (req, res) => {
   } else {
     try {
       bcrypt.hash(password, 5, async function (err, hash) {
-        const userData = new UserModel({ email, password, name, age });
+        const userData = new UserModel({ email, password:hash, name, age });
         await userData.save();
         res.send("user created successfully");
       });
