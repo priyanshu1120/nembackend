@@ -6,7 +6,7 @@ app.use(cors())
 const PORT  = require("dotenv").config().parsed.PORT
 const {connect} = require("./config/db")
 const {userRouter} = require("./routes/user.route")
-const {noteRouter} =  require("./routes/note.route")
+// const {noteRouter} =  require("./routes/note.route")
 const {authentication} = require("./middleware/authentication")
 
 app.get("/",(req,res)=>{
@@ -16,7 +16,7 @@ app.get("/",(req,res)=>{
 app.use("/users",userRouter)
 
 // app.use(authentication)
-app.use("/notes",noteRouter)
+// app.use("/notes",noteRouter)
 
 
 
