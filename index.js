@@ -6,10 +6,6 @@ require("dotenv").config()
 app.use(cors({
     origin:"*"
 }))
-const {connect} = require("./config/db")
-// const {userRouter} = require("./routes/user.route")
-// const {noteRouter} =  require("./routes/note.route")
-// const {authentication} = require("./middleware/authentication")
 
 app.get("/",(req,res)=>{
     res.send("server run ")
