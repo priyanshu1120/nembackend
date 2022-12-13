@@ -5,6 +5,7 @@ const {connect} = require("./config/db")
 const cors = require("cors")
 const {userRouter} = require("./routes/user.route")
 const {noteRouter} = require("./routes/note.route")
+const {educationRouter} = require("./routes/education.route")
 const {authentication} = require("./middleware/authentication")
 require("dotenv").config()
 
@@ -20,6 +21,7 @@ app.use("/users",userRouter)
 
 app.use(authentication)
 app.use("/notes",noteRouter)
+app.use("/education",educationRouter)
 
 
 

@@ -1,12 +1,12 @@
 const express = require("express")
-const noteRouter = express.Router()
-const {NotesModel} = require("../model/note.model")
+const educationRouter = express.Router()
+const {EducationModel} = require("../model/education.model")
 
 
-noteRouter.get("/",async(req,res)=>{
+educationRouter.get("/",async(req,res)=>{
     const userID = req.body.userID
        try{
-        const notes = await NotesModel.find({userID:userID})
+        const notes = await EducationModel.find({userID:userID})
         res.send(notes)
        }catch(err){
         console.log(err)
@@ -15,10 +15,10 @@ noteRouter.get("/",async(req,res)=>{
 })
 
 
-noteRouter.post("/create",async(req,res)=>{
+educationRouter.post("/create",async(req,res)=>{
     try{
          const data = req.body
-         const note = new NotesModel(data)  
+         const note = new EducationModel(data)  
           await note.save()
          res.send("note created successfully")
     }catch(err){
@@ -27,16 +27,16 @@ noteRouter.post("/create",async(req,res)=>{
     }
 })
 
-noteRouter.put("/:noteID",async(req,res)=>{
+educationRouter.put("/:noteID",async(req,res)=>{
      const noteID = req.params.noteID
      const userID = req.body.userID
      const payload = req.body
     try{
-        const usernote = await NotesModel.findOne({_id:noteID})
+        const usernote = await EducationModel.findOne({_id:noteID})
          if(userID!==usernote.userID) {
             res.send("you are not autherized for this")
          } else{
-              await NotesModel.findByIdAndUpdate({_id:noteID},payload)  
+              await EducationModel.findByIdAndUpdate({_id:noteID},payload)  
               res.send({"msg" : "Note updated successfully"})
             
          }    
@@ -46,15 +46,15 @@ noteRouter.put("/:noteID",async(req,res)=>{
 })
 
 
-noteRouter.delete("/:noteID",async(req,res)=>{
+educationRouter.delete("/:noteID",async(req,res)=>{
     const noteID = req.params.noteID
     const userID = req.body.userID
     try{
-        const usernote = await NotesModel.findOne({_id:noteID})
+        const usernote = await EducationModel.findOne({_id:noteID})
          if(userID!==usernote.userID) {
             res.send("you are not authenticated")
          } else{
-              await NotesModel.findByIdAndDelete({_id:noteID})  
+              await EducationModel.findByIdAndDelete({_id:noteID})  
               res.send({"msg" : "Note deleted successfully"})
             
          }    
@@ -65,4 +65,4 @@ noteRouter.delete("/:noteID",async(req,res)=>{
 })
 
 
-module.exports={noteRouter}
+module.exports={educationRouter}
